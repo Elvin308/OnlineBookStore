@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using Rakas_BookStore.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Add SQL Server service and map it to the applicationDbContext class and the default connection string
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
