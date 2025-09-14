@@ -78,7 +78,7 @@ The project will be deployed on **Microsoft Azure**.
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-username/book-store-website.git
+   git clone https://github.com/Elvin308/OnlineBookStore.git
 2. Configure the database in appsettings.json.
 3. Apply migrations:
    ```bash
