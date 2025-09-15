@@ -78,14 +78,18 @@ The project will be deployed on **Microsoft Azure**.
 
 ## ⚡ Getting Started  
 
-1. Open the project in **Visual Studio 2022**.  
-2. Open the **appsettings.json** file and configure your **database connection string**.  
-3. Open the **Package Manager Console** (Tools → NuGet Package Manager → Package Manager Console).  
-4. Make sure the **Default Project** in PMC is set to your ASP.NET Core project.  
-5. Run the following command to apply migrations and create the database:  
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Elvin308/OnlineBookStore.git
+2. Open the project in **Visual Studio 2022**.  
+3. Open the **appsettings.json** file and configure your **database connection string**.  
+4. Open the **Package Manager Console** (Tools → NuGet Package Manager → Package Manager Console).  
+5. Make sure the **Default Project** in PMC is set to your ASP.NET Core project.  
+6. Run the following command to apply migrations and create the database:  
    ```powershell
    Update-Database
-6. Press F5 to run the project locally (or Ctrl + F5 to run without debuggin
+7. Press F5 to run the project locally (or Ctrl + F5 to run without debuggin
 
 ## 👤 Author
 Created by Elvin Martinez
