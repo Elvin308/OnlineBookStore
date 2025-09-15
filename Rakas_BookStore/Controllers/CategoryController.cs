@@ -22,5 +22,13 @@ namespace Rakas_BookStore.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Create(Category cat) //Gets object from html form element
+        {
+            _db.Categories.Add(cat);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
