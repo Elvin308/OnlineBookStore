@@ -25,6 +25,7 @@
                     <th> Category Name</th>
                     <th>Description</th>
                     <th>Display Order</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -35,6 +36,16 @@
                             <td>@cat.Name</td>
                             <td>@cat.Description</td>
                             <td>@cat.DisplayOrder</td>
+                            <td>
+                                <div class="w-auto btn-group" role="group">
+                                    <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary mx-1">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                    <a asp-controller="Category" asp-action="Delete" class="btn btn-primary mx-1">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                     }
                 }

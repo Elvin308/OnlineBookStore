@@ -35,8 +35,39 @@ namespace Rakas_BookStore.Controllers
 
             if (ModelState.IsValid) //Checks validation from the model/class
             {
-
                 _db.Categories.Add(cat);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if(id==null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Category? category = _db.Categories.FirstOrDefault(c => c.Id == id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Category cat)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Update(cat);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
