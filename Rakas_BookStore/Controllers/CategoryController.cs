@@ -37,6 +37,7 @@ namespace Rakas_BookStore.Controllers
             {
                 _db.Categories.Add(cat);
                 _db.SaveChanges();
+                TempData["success"] = "Category created succesfully"; //temporary item, last for only one page load
                 return RedirectToAction("Index");
             }
             else
@@ -69,6 +70,7 @@ namespace Rakas_BookStore.Controllers
             {
                 _db.Categories.Update(cat);
                 _db.SaveChanges();
+                TempData["success"] = "Category edited succesfully"; //temporary item, last for only one page load
                 return RedirectToAction("Index");
             }
             else
@@ -103,6 +105,7 @@ namespace Rakas_BookStore.Controllers
             {
                 _db.Categories.Remove(category);
                 _db.SaveChanges();
+                TempData["success"] = "Category deleted succesfully"; //temporary item, last for only one page load
                 return RedirectToAction("Index");
             }
             else
