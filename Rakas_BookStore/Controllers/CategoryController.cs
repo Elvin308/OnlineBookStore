@@ -26,9 +26,24 @@ namespace Rakas_BookStore.Controllers
         [HttpPost]
         public IActionResult Create(Category cat) //Gets object from html form element
         {
-            _db.Categories.Add(cat);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            //Server side validations
+
+            if(cat.Name == cat.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("Name", "Category Name and Display Order cannot match");
+            }
+
+            if (ModelState.IsValid) //Checks validation from the model/class
+            {
+
+                _db.Categories.Add(cat);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
