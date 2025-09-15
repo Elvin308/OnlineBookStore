@@ -1,0 +1,50 @@
+﻿@model Category //Creates new instance since nothing was passed
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+
+<body>
+    <form method="post"> <!--Send post model-->
+        <div class="border p-3 mt-4">
+            <div class="row pb-0 mb-0">
+                <h2 class="text-primary">Create Category</h2>
+                <hr class="mb-1 pb-0"/>
+            </div>
+            <div asp-validation-summary="All" class="mt-1"></div> <!--Display a summary of all the errors-->
+            <div class="mb-2 row p-1">
+                <label asp-for="Name" class="p-0 fw-bold"></label>
+                <input asp-for="Name" type =" text" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-2 row p-1">
+                <label asp-for="Description" class="p-0 fw-bold"></label>
+                <input asp-for="Description" type="text" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mb-2 row p-1">
+                <label asp-for="DisplayOrder" class="p-0 fw-bold"></label>
+                <input asp-for="DisplayOrder" type="number" class="form-control" />
+                <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-controller="Category" asp-action="Index" class="btn btn-secondary border form-control">Back</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+<!--Consuming partial view JavaScript for client side validation-->
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

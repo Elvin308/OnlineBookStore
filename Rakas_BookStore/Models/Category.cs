@@ -1,0 +1,26 @@
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+
+namespace Rakas_BookStore.Models
+{
+    public class Category
+    {
+        [Key] //Primary Key
+        public int Id { get; set; }
+
+        [Required]
+        [DisplayName("Category Name")]
+        [MaxLength(30)]
+        public string Name { get; set; }
+
+        [DisplayName("Category Description")]
+        [MaxLength(100)]
+        public string Description { get; set; }
+
+        [DisplayName("Display Order")]
+        [Range(1,100, ErrorMessage ="Display Order must be between 1 - 100")]
+        public int DisplayOrder { get; set; }
+
+    }
+}
