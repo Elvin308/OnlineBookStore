@@ -55,7 +55,7 @@ The project will be deployed on **Microsoft Azure**.
 ---
 
 ## 🛠️ Tech Stack  
-- **Frameworks:** ASP.NET Core 8, ASP.NET Core MVC, Razor Pages  
+- **Frameworks:** ASP.NET Core 8, ASP.NET Core MVC
 - **Database:** SQL Server + Entity Framework Core  
 - **Authentication:** Identity Framework  
 - **Frontend:** HTML, CSS, Bootstrap  
