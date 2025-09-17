@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Rakas_BookStore.Data;
+using Rakas_BookStore.DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

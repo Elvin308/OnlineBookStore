@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rakas_BookStore.Data;
+using Rakas_BookStore.DataAccess.Data;
 using Rakas_BookStore.Models;
 
 namespace Rakas_BookStore.Controllers
