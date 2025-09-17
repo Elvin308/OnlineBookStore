@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Rakas_BookStore.DataAccess;
 using Rakas_BookStore.DataAccess.Data;
+using Rakas_BookStore.DataAccess.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,9 @@ builder.Services.AddControllersWithViews();
 
 //Add SQL Server service and map it to the applicationDbContext class and the default connection string
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//Dependency Injections:
+builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 
 var app = builder.Build();
 
