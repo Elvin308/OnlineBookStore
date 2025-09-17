@@ -11,8 +11,8 @@ using Rakas_BookStore.DataAccess.Data;
 namespace Rakas_BookStore.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250913034336_SeedCategoryTable")]
-    partial class SeedCategoryTable
+    [Migration("20250917031951_AddCategoryAndSeedDb")]
+    partial class AddCategoryAndSeedDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,14 +34,16 @@ namespace Rakas_BookStore.DataAccess.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -65,7 +67,7 @@ namespace Rakas_BookStore.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            Description = "Real Pasr events",
+                            Description = "Real Past events",
                             DisplayOrder = 3,
                             Name = "History"
                         },
