@@ -13,7 +13,7 @@ namespace Rakas_BookStore.DataAccess
     internal class Repository<T> : IRepository<T> where T : class //Generic class that implements generic Repository interface
     {
         private readonly ApplicationDbContext _context;
-        private DbSet<T> _dbSet;
+        internal DbSet<T> _dbSet; //Only accessible in this project
 
         //Get database from DI
         public Repository(ApplicationDbContext context)
