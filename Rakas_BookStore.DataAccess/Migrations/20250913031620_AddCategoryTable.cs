@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Rakas_BookStore.Migrations
+namespace Rakas_BookStore.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryTable : Migration

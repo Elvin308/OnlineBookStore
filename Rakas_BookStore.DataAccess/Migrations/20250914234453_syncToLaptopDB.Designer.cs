@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Rakas_BookStore.Data;
+using Rakas_BookStore.DataAccess.Data;
 
 #nullable disable
 
-namespace Rakas_BookStore.Migrations
+namespace Rakas_BookStore.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250913031620_AddCategoryTable")]
-    partial class AddCategoryTable
+    [Migration("20250914234453_syncToLaptopDB")]
+    partial class syncToLaptopDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,36 @@ namespace Rakas_BookStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Stories centered on physical conflicts and powerful antagonists",
+                            DisplayOrder = 1,
+                            Name = "Action"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Love stories between characters",
+                            DisplayOrder = 2,
+                            Name = "Romance"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Real Past events",
+                            DisplayOrder = 3,
+                            Name = "History"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Stories about advanced technology, time travel, and extraterrestrial life",
+                            DisplayOrder = 4,
+                            Name = "SciFi"
+                        });
                 });
 #pragma warning restore 612, 618
         }

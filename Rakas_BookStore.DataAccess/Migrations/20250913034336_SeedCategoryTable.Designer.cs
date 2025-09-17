@@ -2,17 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Rakas_BookStore.Data;
+using Rakas_BookStore.DataAccess.Data;
 
 #nullable disable
 
-namespace Rakas_BookStore.Migrations
+namespace Rakas_BookStore.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250913034336_SeedCategoryTable")]
+    partial class SeedCategoryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace Rakas_BookStore.Migrations
                         new
                         {
                             Id = 3,
-                            Description = "Real Past events",
+                            Description = "Real Pasr events",
                             DisplayOrder = 3,
                             Name = "History"
                         },

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rakas_BookStore.Models;
 
-namespace Rakas_BookStore.Data
+namespace Rakas_BookStore.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

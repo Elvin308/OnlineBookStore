@@ -2,20 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Rakas_BookStore.Data;
+using Rakas_BookStore.DataAccess.Data;
 
 #nullable disable
 
 namespace Rakas_BookStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250914234453_syncToLaptopDB")]
-    partial class syncToLaptopDB
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
