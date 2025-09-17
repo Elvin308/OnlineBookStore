@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Rakas_BookStore.DataAccess
 {
-    internal class Repository<T> : IRepository<T> where T : class //Generic class that implements generic Repository interface
+    public class Repository<T> : IRepository<T> where T : class //Generic class that implements generic Repository interface
     {
         private readonly ApplicationDbContext _context;
         internal DbSet<T> _dbSet; //Only accessible in this project
