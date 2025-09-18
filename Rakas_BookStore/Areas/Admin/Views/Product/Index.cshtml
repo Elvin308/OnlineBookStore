@@ -28,14 +28,11 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th> Product Title</th>
-                        <th>Description</th>
+                        <th>Title</th>
                         <th>ISBN</th>
-                        <th>Author</th>
-                        <th>List Price</th>
                         <th>Price</th>
-                        <th>Price50</th>
-                        <th>Price100</th>
+                        <th>Author</th>
+                        <th>Category</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -45,13 +42,10 @@
                         {
                             <tr>
                                 <td>@prod.Title</td>
-                                <td>@prod.Description</td>
                                 <td>@prod.ISBN</td>
-                                <td>@prod.Author</td>
                                 <td>@prod.ListPrice</td>
-                                <td>@prod.Price</td>
-                                <td>@prod.Price50</td>
-                                <td>@prod.Price100</td>
+                                <td>@prod.Author</td>
+                                <td></td>
                                 <td>
                                     <div class="w-auto btn-group" role="group">
                                         <a asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@prod.Id" class="btn btn-primary mx-1">

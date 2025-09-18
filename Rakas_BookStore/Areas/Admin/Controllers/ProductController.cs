@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Rakas_BookStore.DataAccess.Interfaces;
 using Rakas_BookStore.Models;
@@ -24,6 +25,15 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
+            //Make a list of category with a display text and an underlying value
+            IEnumerable<SelectListItem> categoryList = _repositoryWork.CategoryRepository
+                .GetAll().Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString()
+                });
+
+            ViewBag.CategoryList = categoryList;
             return View();
         }
 
