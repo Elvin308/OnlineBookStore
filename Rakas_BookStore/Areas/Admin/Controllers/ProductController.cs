@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Rakas_BookStore.DataAccess.Interfaces;
 using Rakas_BookStore.Models;
+using Rakas_BookStore.Models.ViewModels;
 
 namespace Rakas_BookStore.Areas.Admin.Controllers
 {
@@ -25,25 +26,26 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            //Make a list of category with a display text and an underlying value
-            IEnumerable<SelectListItem> categoryList = _repositoryWork.CategoryRepository
+            ProductVM productVM = new ProductVM
+            {
+                CategoryList = _repositoryWork.CategoryRepository
                 .GetAll().Select(x => new SelectListItem
                 {
                     Text = x.Name,
                     Value = x.Id.ToString()
-                });
-
-            ViewBag.CategoryList = categoryList;
-            return View();
+                }),
+                Product = new Product()
+            };
+            return View(productVM);
         }
 
 
         [HttpPost]
-        public IActionResult Create(Product prod)
+        public IActionResult Create(ProductVM prod)
         {
             if (ModelState.IsValid)
             {
-                _repositoryWork.ProductRepository.Add(prod);
+                _repositoryWork.ProductRepository.Add(prod.Product);
                 _repositoryWork.Save();
 
                 TempData["success"] = "Product created succesfully";
