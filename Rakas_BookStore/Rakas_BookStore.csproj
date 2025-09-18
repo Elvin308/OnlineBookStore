@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Rakas_BookStore.DataAccess\Rakas_BookStore.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
