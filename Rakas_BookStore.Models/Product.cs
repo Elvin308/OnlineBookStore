@@ -31,17 +31,17 @@ namespace Rakas_BookStore.Models
         public double ListPrice { get; set; }
 
         [Required]
-        [DisplayName("Price for 1-50")]
+        [DisplayName("Price")]
         [Range(1, 1000)]
         public double Price { get; set; }
 
         [Required]
-        [DisplayName("Price for 50-100")]
+        [DisplayName("Price 50+")]
         [Range(1, 1000)]
         public double Price50 { get; set; }
 
         [Required]
-        [DisplayName("Price for 100+")]
+        [DisplayName("Price 100+")]
         [Range(1, 1000)]
         public double Price100 { get; set; }
     }
