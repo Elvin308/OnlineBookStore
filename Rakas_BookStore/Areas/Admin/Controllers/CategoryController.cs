@@ -2,8 +2,9 @@
 using Rakas_BookStore.DataAccess.Interfaces;
 using Rakas_BookStore.Models;
 
-namespace Rakas_BookStore.Controllers
+namespace Rakas_BookStore.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IRepositoryWork _repositoryWork;
