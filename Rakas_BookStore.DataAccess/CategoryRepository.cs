@@ -18,11 +18,6 @@ namespace Rakas_BookStore.DataAccess
             _context = context;
         }
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
-
         public void Update(Category cat)
         {
             _context.Update(cat);

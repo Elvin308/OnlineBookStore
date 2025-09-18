@@ -6,15 +6,15 @@ namespace Rakas_BookStore.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository _categoryRepository;
-        public CategoryController(ICategoryRepository categoryRepository)
+        private readonly IRepositoryWork _repositoryWork;
+        public CategoryController(IRepositoryWork repositoryWork)
         {
-            _categoryRepository = categoryRepository;
+            _repositoryWork = repositoryWork;
         }
 
         public IActionResult Index()
         {
-            List<Category> categoryList = _categoryRepository.GetAll().ToList();
+            List<Category> categoryList = _repositoryWork.CategoryRepository.GetAll().ToList();
             return View(categoryList);
         }
 
@@ -35,8 +35,8 @@ namespace Rakas_BookStore.Controllers
 
             if (ModelState.IsValid) //Checks validation from the model/class
             {
-                _categoryRepository.Add(cat);
-                _categoryRepository.Save();
+                _repositoryWork.CategoryRepository.Add(cat);
+                _repositoryWork.Save();
                 TempData["success"] = "Category created succesfully"; //temporary item, last for only one page load
                 return RedirectToAction("Index");
             }
@@ -53,7 +53,7 @@ namespace Rakas_BookStore.Controllers
                 return NotFound();
             }
             
-            Category? category = _categoryRepository.GetFirstOrDefault(c => c.Id == id);
+            Category? category = _repositoryWork.CategoryRepository.GetFirstOrDefault(c => c.Id == id);
 
             if (category == null)
             {
@@ -68,8 +68,8 @@ namespace Rakas_BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryRepository.Update(cat);
-                _categoryRepository.Save();
+                _repositoryWork.CategoryRepository.Update(cat);
+                _repositoryWork.Save();
                 TempData["success"] = "Category edited succesfully"; //temporary item, last for only one page load
                 return RedirectToAction("Index");
             }
@@ -86,7 +86,7 @@ namespace Rakas_BookStore.Controllers
                 return NotFound();
             }
 
-            Category? category = _categoryRepository.GetFirstOrDefault(c => c.Id == id);
+            Category? category = _repositoryWork.CategoryRepository.GetFirstOrDefault(c => c.Id == id);
 
             if (category == null)
             {
@@ -100,11 +100,11 @@ namespace Rakas_BookStore.Controllers
         public IActionResult DeletePOST(int? id)
         {
 
-            Category? category = _categoryRepository.GetFirstOrDefault(c => c.Id == id);
+            Category? category = _repositoryWork.CategoryRepository.GetFirstOrDefault(c => c.Id == id);
             if (category != null)
             {
-                _categoryRepository.Remove(category);
-                _categoryRepository.Save();
+                _repositoryWork.CategoryRepository.Remove(category);
+                _repositoryWork.Save();
                 TempData["success"] = "Category deleted succesfully"; //temporary item, last for only one page load
                 return RedirectToAction("Index");
             }
