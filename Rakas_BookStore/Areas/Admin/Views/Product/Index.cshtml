@@ -1,0 +1,76 @@
+﻿@model List<Product>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+
+<body>
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-primary bg-gradient m-lg-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">Product List</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4 text-info">
+            <div class="row pb-2">
+                <div class="col-6"></div>
+                <div class="col-6 text-end">
+                    <a asp-area="Admin" asp-controller="Product" asp-action="Create" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"> Create New Product</i>
+                    </a>
+                </div>
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th> Product Title</th>
+                        <th>Description</th>
+                        <th>ISBN</th>
+                        <th>Author</th>
+                        <th>List Price</th>
+                        <th>Price</th>
+                        <th>Price50</th>
+                        <th>Price100</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var prod in Model)
+                        {
+                            <tr>
+                                <td>@prod.Title</td>
+                                <td>@prod.Description</td>
+                                <td>@prod.ISBN</td>
+                                <td>@prod.Author</td>
+                                <td>@prod.ListPrice</td>
+                                <td>@prod.Price</td>
+                                <td>@prod.Price50</td>
+                                <td>@prod.Price100</td>
+                                <td>
+                                    <div class="w-auto btn-group" role="group">
+                                        <a asp-area="Admin" asp-controller="Producct" asp-action="Edit" asp-route-id="@prod.Id" class="btn btn-primary mx-1">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <a asp-area="Admin"  asp-controller="Product" asp-action="Delete" asp-route-id="@prod.Id" class="btn btn-primary mx-1">
+                                            <i class="bi bi-trash"></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container">
+    </div>
+</body>
+</html>

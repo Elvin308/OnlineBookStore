@@ -15,10 +15,13 @@ namespace Rakas_BookStore.DataAccess
 
         public ICategoryRepository CategoryRepository { get; private set; }
 
+        public IProductRepository ProductRepository { get; private set; }
+
         public RepositoryWork(ApplicationDbContext context)
         {
             _context = context;
             CategoryRepository = new CategoryRepository(_context);
+            ProductRepository = new ProductRepository(_context);
         }
 
         public void Save()
