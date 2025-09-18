@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Rakas_BookStore.DataAccess;
 using Rakas_BookStore.DataAccess.Interfaces;
 using Rakas_BookStore.Models;
 using Rakas_BookStore.Models.ViewModels;
@@ -24,7 +25,7 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
             return View(productList);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
             ProductVM productVM = new ProductVM
             {
@@ -34,14 +35,14 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
                     Text = x.Name,
                     Value = x.Id.ToString()
                 }),
-                Product = new Product()
+                Product = (id == null || id == 0) ? new Product() : _repositoryWork.ProductRepository.GetFirstOrDefault(x => x.Id == id)
             };
             return View(productVM);
         }
 
 
         [HttpPost]
-        public IActionResult Create(ProductVM prod)
+        public IActionResult Create(ProductVM prod, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
@@ -58,40 +59,7 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
             
         }
 
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            Product? prod = _repositoryWork.ProductRepository.GetFirstOrDefault(x=> x.Id == id);
-
-            if (prod == null)
-            {
-                return NotFound();
-            }
-            
-            return View(prod);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product prod)
-        {
-            if (ModelState.IsValid)
-            {
-                _repositoryWork.ProductRepository.Update(prod);
-                _repositoryWork.Save();
-
-                TempData["success"] = "Product updated succesfully";
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View();
-            }
-        }
-
+       
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)

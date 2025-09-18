@@ -19,7 +19,7 @@
             <div class="row pb-2">
                 <div class="col-6"></div>
                 <div class="col-6 text-end">
-                    <a asp-area="Admin" asp-controller="Product" asp-action="Create" class="btn btn-primary">
+                    <a asp-area="Admin" asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
                         <i class="bi bi-plus-circle"> Create New Product</i>
                     </a>
                 </div>
@@ -48,7 +48,7 @@
                                 <td></td>
                                 <td>
                                     <div class="w-auto btn-group" role="group">
-                                        <a asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@prod.Id" class="btn btn-primary mx-1">
+                                        <a asp-area="Admin" asp-controller="Product" asp-action="Upsert" asp-route-id="@prod.Id" class="btn btn-primary mx-1">
                                             <i class="bi bi-pencil-square"></i> Edit
                                         </a>
                                         <a asp-area="Admin"  asp-controller="Product" asp-action="Delete" asp-route-id="@prod.Id" class="btn btn-primary mx-1">
