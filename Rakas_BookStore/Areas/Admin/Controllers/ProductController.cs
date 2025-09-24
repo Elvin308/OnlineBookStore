@@ -54,6 +54,14 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
                     string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string productPath = Path.Combine(wwwRootPath, @"images\product");
 
+                    if (!string.IsNullOrEmpty(prod.Product.ImageUrl)) //We are replacing old with new
+                    {
+                        var oldImagePath = Path.Combine(wwwRootPath, prod.Product.ImageUrl.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(oldImagePath))
+                            System.IO.File.Delete(oldImagePath);
+                    }
+
                     using (var fileStream = new FileStream(Path.Combine(productPath, filename), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
@@ -62,7 +70,15 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
                     prod.Product.ImageUrl = @"\images\product\" + filename;
                 }
 
-                _repositoryWork.ProductRepository.Add(prod.Product);
+                if (prod.Product.Id == 0) //New product / no ID yet
+                {
+                    _repositoryWork.ProductRepository.Add(prod.Product);
+                }
+                else //Updating product
+                {
+                    _repositoryWork.ProductRepository.Update(prod.Product);
+                }
+                    
                 _repositoryWork.Save();
 
                 TempData["success"] = "Product created succesfully";

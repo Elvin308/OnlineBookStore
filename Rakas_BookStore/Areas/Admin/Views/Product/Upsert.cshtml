@@ -3,7 +3,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <style>
+        .text-danger:empty{
+            display: none;
+        }
+        img{
+            width:200px;
+            height:200px;
+            border-radius: 5px;
+            border: 1px solid white;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,6 +28,7 @@
         <div class="card-body p-4">
             <form method="post" class="row" enctype="multipart/form-data">
                 <input asp-for="Product.Id" hidden/>
+                <input asp-for="Product.ImageUrl" hidden />
                 <!--Send post model-->
                 <div class="border p-3">
                     <div asp-validation-summary="All" class="mt-1 text-danger"></div> <!--Display a summary of all the errors-->
@@ -72,6 +83,15 @@
                         <input type="file" name="file" class="form-control border-1 shadow" />
                         <label asp-for="Product.ImageUrl" class="ms-2"></label>
                     </div>
+
+                    @if(!string.IsNullOrEmpty(Model.Product.ImageUrl))
+                    {
+                        <div class="form-floating">
+                            <img src="@Model.Product.ImageUrl" />
+                        </div>
+                    }
+
+                    
                     <div class="row pt-2">
                         <div class="col-6 col-md-3">
                             @if (Model.Product.Id != 0){
