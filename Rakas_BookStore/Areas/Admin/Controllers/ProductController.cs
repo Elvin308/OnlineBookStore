@@ -13,10 +13,12 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
     {
 
         private readonly IRepositoryWork _repositoryWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IRepositoryWork repositoryWork)
+        public ProductController(IRepositoryWork repositoryWork, IWebHostEnvironment webHostEnvironment)
         {
             _repositoryWork = repositoryWork;
+            _webHostEnvironment = webHostEnvironment; //DI'ed automatically by default in ASP.NET
         }
 
         public IActionResult Index()
@@ -42,10 +44,24 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(ProductVM prod, IFormFile? file)
+        public IActionResult Upsert(ProductVM prod, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath; //Get the wwwRoot path
+                if (file != null)
+                {
+                    string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootPath, @"images\product");
+
+                    using (var fileStream = new FileStream(Path.Combine(productPath, filename), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    prod.Product.ImageUrl = @"\images\product\" + filename;
+                }
+
                 _repositoryWork.ProductRepository.Add(prod.Product);
                 _repositoryWork.Save();
 
