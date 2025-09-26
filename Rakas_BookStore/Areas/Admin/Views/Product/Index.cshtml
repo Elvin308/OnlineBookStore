@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <table class="table table-bordered table-striped">
+            <table id="prodTable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -36,35 +36,12 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @{
-                        foreach (var prod in Model)
-                        {
-                            <tr>
-                                <td>@prod.Title</td>
-                                <td>@prod.ISBN</td>
-                                <td>@prod.ListPrice</td>
-                                <td>@prod.Author</td>
-                                <td>@prod.Category.Name</td>
-                                <td>
-                                    <div class="w-auto btn-group" role="group">
-                                        <a asp-area="Admin" asp-controller="Product" asp-action="Upsert" asp-route-id="@prod.Id" class="btn btn-primary mx-1">
-                                            <i class="bi bi-pencil-square"></i> Edit
-                                        </a>
-                                        <a asp-area="Admin"  asp-controller="Product" asp-action="Delete" asp-route-id="@prod.Id" class="btn btn-primary mx-1">
-                                            <i class="bi bi-trash"></i> Delete
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
             </table>
         </div>
     </div>
-
-    <div class="container">
-    </div>
 </body>
 </html>
+
+@section Scripts {
+    <script src="~/js/Product.js"></script>
+}

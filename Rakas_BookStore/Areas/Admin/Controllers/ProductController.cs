@@ -69,6 +69,10 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
 
                     prod.Product.ImageUrl = @"\images\product\" + filename;
                 }
+                else
+                {
+                    prod.Product.ImageUrl = "";
+                }
 
                 if (prod.Product.Id == 0) //New product / no ID yet
                 {
@@ -91,31 +95,41 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
             
         }
 
-       
+        #region Sudo API
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Product> productList = _repositoryWork.ProductRepository.GetAll("Category").ToList();
+            return Json(new {data = productList});
+        }
+
+
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var prodDelete = _repositoryWork.ProductRepository.GetFirstOrDefault(x=>x.Id == id);
+            if (prodDelete == null)
             {
-                return NotFound();
+                return Json(new
+                {
+                    success = false,
+                    message = "Error Deleting"
+                });
             }
 
-            Product? prod = _repositoryWork.ProductRepository.GetFirstOrDefault(x => x.Id == id);
+            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, prodDelete.ImageUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(oldImagePath))
+                System.IO.File.Delete(oldImagePath);
 
-            if (prod == null)
-            {
-                return NotFound();
-            }
-
-            return View(prod);
-        }
-
-        [HttpPost]
-        public IActionResult Delete(Product prod)
-        {
-            _repositoryWork.ProductRepository.Remove(prod);
+            _repositoryWork.ProductRepository.Remove(prodDelete);
             _repositoryWork.Save();
-            TempData["success"] = "Product deleted succesfully";
-            return RedirectToAction("Index");
+
+
+            return Json(new
+            {
+                success = true,
+                message = "Delete Successful"
+            });
         }
+        #endregion
     }
 }
