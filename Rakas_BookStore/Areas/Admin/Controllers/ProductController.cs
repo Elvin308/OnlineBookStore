@@ -103,7 +103,7 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
             return Json(new {data = productList});
         }
 
-
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
             var prodDelete = _repositoryWork.ProductRepository.GetFirstOrDefault(x=>x.Id == id);
