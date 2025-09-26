@@ -9,6 +9,7 @@ namespace Rakas_BookStore.DataAccess.Interfaces
     public interface IRepositoryWork
     {
         ICategoryRepository CategoryRepository { get; }
+        IProductRepository ProductRepository { get; }
 
         void Save();
     }

@@ -10,10 +10,12 @@ namespace Rakas_BookStore.DataAccess.Interfaces
     public interface IRepository<T> where T : class //Generetic interface that takes in a class
     {
         //Get first item // Allow use of Linq expressions
-        T GetFirstOrDefault(Expression<Func<T, bool>> expression);
+        //Allow include functionality for loading additional tables through foreign keys
+        T GetFirstOrDefault(Expression<Func<T, bool>> expression, string? connectingTables = null);
 
         //Get all items
-        IEnumerable<T> GetAll();
+        //Allow include functionality for loading additional tables through foreign keys
+        IEnumerable<T> GetAll(string? connectingTables = null);
 
         //Add Item
         void Add(T entity);
