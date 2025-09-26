@@ -23,7 +23,7 @@ namespace Rakas_BookStore.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> productList = _repositoryWork.ProductRepository.GetAll().ToList();
+            List<Product> productList = _repositoryWork.ProductRepository.GetAll("Category").ToList();
             return View(productList);
         }
 
