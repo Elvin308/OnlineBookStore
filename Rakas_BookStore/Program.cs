@@ -16,6 +16,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 //Dependency Injections:
 builder.Services.AddScoped<IRepositoryWork,RepositoryWork>();
+builder.Services.AddRazorPages(); //Add razor pages use
 
 var app = builder.Build();
 
@@ -31,8 +32,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication(); //Check that the user is authenticated before we give any sort of autherization
 app.UseAuthorization();
+
+app.MapRazorPages(); //Add razor pages mapping
 
 app.MapControllerRoute(
     name: "default",
