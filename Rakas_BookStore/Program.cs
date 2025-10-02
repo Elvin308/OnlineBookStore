@@ -3,6 +3,8 @@ using Rakas_BookStore.DataAccess;
 using Rakas_BookStore.DataAccess.Data;
 using Rakas_BookStore.DataAccess.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Rakas_BookStore.Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,11 +14,12 @@ builder.Services.AddControllersWithViews();
 //Add SQL Server service and map it to the applicationDbContext class and the default connection string
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 //Dependency Injections:
 builder.Services.AddScoped<IRepositoryWork,RepositoryWork>();
 builder.Services.AddRazorPages(); //Add razor pages use
+builder.Services.AddScoped<IEmailSender,EmailSender>();
 
 var app = builder.Build();
 
