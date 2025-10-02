@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews();
 //Add SQL Server service and map it to the applicationDbContext class and the default connection string
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
 
 //Dependency Injections:
 builder.Services.AddScoped<IRepositoryWork,RepositoryWork>();
