@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Rakas_BookStore.DataAccess;
 using Rakas_BookStore.DataAccess.Data;
 using Rakas_BookStore.DataAccess.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Rakas_BookStore.Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +14,20 @@ builder.Services.AddControllersWithViews();
 //Add SQL Server service and map it to the applicationDbContext class and the default connection string
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
 //Dependency Injections:
 builder.Services.AddScoped<IRepositoryWork,RepositoryWork>();
+builder.Services.AddRazorPages(); //Add razor pages use
+builder.Services.AddScoped<IEmailSender,EmailSender>();
+
+//Add default paths for login, logout and access denied
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
 
 var app = builder.Build();
 
@@ -28,8 +43,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication(); //Check that the user is authenticated before we give any sort of autherization
 app.UseAuthorization();
+
+app.MapRazorPages(); //Add razor pages mapping
 
 app.MapControllerRoute(
     name: "default",

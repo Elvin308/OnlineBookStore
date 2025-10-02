@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Rakas_BookStore.Models;
 
 namespace Rakas_BookStore.DataAccess.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         //Retrieve connectionString
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -14,10 +16,13 @@ namespace Rakas_BookStore.DataAccess.Data
         //Create and manage table
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         //Seed dummy data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Action", Description = "Stories centered on physical conflicts and powerful antagonists", DisplayOrder = 1 },
                 new Category { Id = 2, Name = "Romance", Description = "Love stories between characters", DisplayOrder = 2 },
