@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Rakas_BookStore.DataAccess;
 using Rakas_BookStore.DataAccess.Interfaces;
 using Rakas_BookStore.Models;
 using Rakas_BookStore.Models.ViewModels;
+using Rakas_BookStore.Utility;
 
 namespace Rakas_BookStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = StaticDetails.Role_Admin)]
     public class ProductController : Controller
     {
 

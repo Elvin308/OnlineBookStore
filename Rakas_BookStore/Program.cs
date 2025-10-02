@@ -21,6 +21,14 @@ builder.Services.AddScoped<IRepositoryWork,RepositoryWork>();
 builder.Services.AddRazorPages(); //Add razor pages use
 builder.Services.AddScoped<IEmailSender,EmailSender>();
 
+//Add default paths for login, logout and access denied
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
