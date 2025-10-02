@@ -76,8 +76,6 @@ The project will be deployed on **Microsoft Azure**.
 
 ## ⚡ Getting Started  
 
-## ⚡ Getting Started  
-
 
 1. Clone the repository:
    ```bash
